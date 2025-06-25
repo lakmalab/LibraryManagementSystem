@@ -1,19 +1,15 @@
 package dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookDto {
     private Long bookID;
-    private Long  ISBN;
-    private String Title;
-    private String Author;
-    private String Genre;
-    private Boolean Availability;
+    private Long  isbn;
+    private String title;
+    private String author;
+    private String genre;
+    private Boolean available;
 }
