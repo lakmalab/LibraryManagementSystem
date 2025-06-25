@@ -1,4 +1,7 @@
 package service;
 
-public class SuperService {
+import util.ServiceType;
+
+public interface SuperService {
+
 }

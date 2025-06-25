@@ -1,4 +1,4 @@
 package repository;
 
-public class SuperRepository {
+public interface SuperRepository {
 }
