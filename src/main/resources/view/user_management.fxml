@@ -2,9 +2,9 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextArea?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -17,14 +17,15 @@
       </Label>
       <JFXTextArea fx:id="txtSearch" layoutX="48.0" layoutY="79.0" prefHeight="20.0" prefWidth="216.0" promptText="Search" />
       <JFXButton layoutX="546.0" layoutY="84.0" onAction="#btnAddUserOnAction" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: navy blue;" text="Add New User" textFill="#e4e4e4" />
-      <JFXTreeTableView fx:id="tblUser" layoutX="14.0" layoutY="144.0" prefHeight="337.0" prefWidth="655.0">
-         <columns>
-            <TreeTableColumn fx:id="colUserId" prefWidth="75.0" text="UserId" />
-            <TreeTableColumn fx:id="ColName" prefWidth="199.3333511352539" text="Name" />
-            <TreeTableColumn fx:id="colAddress" prefWidth="242.66665649414062" text="Address" />
-            <TreeTableColumn fx:id="colContact" prefWidth="137.33331298828125" text="Contact" />
-         </columns>
-      </JFXTreeTableView>
       <JFXButton layoutX="212.0" layoutY="84.0" onAction="#btnSearchOnAction" text="Search" />
+      <TableView fx:id="tblUser" layoutX="10.0" layoutY="149.0" prefHeight="342.0" prefWidth="665.0">
+        <columns>
+          <TableColumn fx:id="colUserId" prefWidth="49.33334255218506" text="UserId" />
+          <TableColumn fx:id="ColName" prefWidth="209.33335494995117" text="Name" />
+            <TableColumn fx:id="colAddress" prefWidth="139.99993896484375" text="Address" />
+            <TableColumn fx:id="colContact" prefWidth="132.66665649414062" text="Contact" />
+            <TableColumn fx:id="colNationalIdNo" prefWidth="131.33331298828125" text="National Id No" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>
