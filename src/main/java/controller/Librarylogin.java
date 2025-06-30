@@ -26,7 +26,7 @@ public class Librarylogin {
     void btnLogInOnAction(ActionEvent event) throws IOException {
         if (txtUser.getText().equals(username) && txtPassword.getText().equals(password)) {
             Stage stage = new Stage();
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/Dashboard.fxml"))));
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/dashboard.fxml"))));
             stage.show();
             new Alert(Alert.AlertType.INFORMATION,"Hello "+username+" \n Welcome Back").show();
         }else {

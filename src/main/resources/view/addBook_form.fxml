@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="511.0" prefWidth="865.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BookFormController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#002b54" height="511.0" stroke="BLACK" strokeType="INSIDE" width="226.0" />
+      <Label layoutX="10.0" layoutY="14.0" prefHeight="64.0" prefWidth="206.0" text="Library Management " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="15.0" layoutY="121.0" onAction="#btnCustomerFormOnAction" prefHeight="41.0" prefWidth="190.0" style="-fx-background-color: #16a085;" text="Add Book" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="15.0" layoutY="183.0" onAction="#btnItemFormOnAction" prefHeight="41.0" prefWidth="190.0" style="-fx-background-color: #16a085;" text="Add User" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="15.0" layoutY="247.0" onAction="#btnPlaceOrderFormOnAction" prefHeight="41.0" prefWidth="190.0" style="-fx-background-color: #16a085;" text="Search Books" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <AnchorPane fx:id="root" layoutX="226.0" prefHeight="472.0" prefWidth="600.0" />
+   </children>
+</AnchorPane>

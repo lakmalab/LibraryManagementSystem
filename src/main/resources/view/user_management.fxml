@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="511.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserManagementFormController">
+   <children>
+      <Label layoutX="219.0" layoutY="14.0" prefHeight="23.0" prefWidth="243.0" text="User Management" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Black" size="22.0" />
+         </font>
+      </Label>
+      <JFXTextArea fx:id="txtSearch" layoutX="48.0" layoutY="79.0" prefHeight="20.0" prefWidth="216.0" promptText="Search" />
+      <JFXButton layoutX="546.0" layoutY="84.0" onAction="#btnAddUserOnAction" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: navy blue;" text="Add New User" textFill="#e4e4e4" />
+      <JFXTreeTableView fx:id="tblUser" layoutX="14.0" layoutY="144.0" prefHeight="337.0" prefWidth="655.0">
+         <columns>
+            <TreeTableColumn fx:id="colUserId" prefWidth="75.0" text="UserId" />
+            <TreeTableColumn fx:id="ColName" prefWidth="199.3333511352539" text="Name" />
+            <TreeTableColumn fx:id="colAddress" prefWidth="242.66665649414062" text="Address" />
+            <TreeTableColumn fx:id="colContact" prefWidth="137.33331298828125" text="Contact" />
+         </columns>
+      </JFXTreeTableView>
+      <JFXButton layoutX="212.0" layoutY="84.0" onAction="#btnSearchOnAction" text="Search" />
+   </children>
+</AnchorPane>
