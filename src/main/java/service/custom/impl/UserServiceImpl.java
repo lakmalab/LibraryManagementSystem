@@ -24,8 +24,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Boolean deleteUser(UserDto User) throws SQLException {
+        UserEntity entity = new ModelMapper().map(User, UserEntity.class);
+        return repository.deleteById(entity.getUserId());
+    }
+
+    @Override
     public Boolean updateUser(UserDto User) {
-        return null;
+        UserEntity entity = new ModelMapper().map(User, UserEntity.class);
+        return repository.update(entity);
     }
 
     @Override

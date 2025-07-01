@@ -42,7 +42,7 @@ public class AddNewUser {
         try {
             UserDto userDto = userService.searchById(idnumber);
             if (userDto!=null) {
-                new Alert(Alert.AlertType.ERROR, "Customer with ID " + idnumber + " already exists.").show();
+                new Alert(Alert.AlertType.ERROR, "User with ID " + idnumber + " already exists.").show();
                 return;
             }
         } catch (SQLException e) {
@@ -56,9 +56,9 @@ public class AddNewUser {
             Boolean b = userService.addUser(newUser);
 
             if (b) {
-                new Alert(Alert.AlertType.INFORMATION, "Customer Added Successfully!").show();
+                new Alert(Alert.AlertType.INFORMATION, "User Added Successfully!").show();
             } else {
-                new Alert(Alert.AlertType.ERROR, "Failed to add customer.").show();
+                new Alert(Alert.AlertType.ERROR, "Failed to add User.").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Database Error: " + e.getMessage()).show();

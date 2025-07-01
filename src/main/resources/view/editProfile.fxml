@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="346.0" prefWidth="299.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditProfileFormController">
+   <children>
+      <Label layoutX="19.0" layoutY="14.0" prefHeight="37.0" prefWidth="149.0" text="Edit Profile">
+         <font>
+            <Font name="Arial Black" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="25.0" layoutY="67.0" prefHeight="20.0" prefWidth="67.0" text="Name :" />
+      <Label layoutX="24.0" layoutY="140.0" prefHeight="20.0" prefWidth="67.0" text="Address :" />
+      <Label layoutX="24.0" layoutY="207.0" prefHeight="20.0" prefWidth="67.0" text="Contact :" />
+      <JFXButton layoutX="16.0" layoutY="296.0" onAction="#btnCancelOnAction" prefHeight="37.0" prefWidth="86.0" style="-fx-background-color: red;" text="Cancel" textFill="WHITE" />
+      <JFXButton layoutX="189.0" layoutY="296.0" onAction="#btnUpdateOnAction" prefHeight="37.0" prefWidth="86.0" style="-fx-background-color: navy blue;" text="Update" textFill="WHITE" />
+      <TextField fx:id="txtName" layoutX="93.0" layoutY="61.0" prefHeight="29.0" prefWidth="199.0" />
+      <TextField fx:id="txtAddress" layoutX="93.0" layoutY="135.0" prefHeight="58.0" prefWidth="199.0" />
+      <TextField fx:id="txtContact" layoutX="93.0" layoutY="202.0" prefHeight="29.0" prefWidth="199.0" />
+      <Label layoutX="24.0" layoutY="101.0" prefHeight="20.0" prefWidth="67.0" text="National ID:" />
+      <TextField fx:id="txtIdNumber" layoutX="94.0" layoutY="96.0" prefHeight="29.0" prefWidth="199.0" />
+      <Label layoutX="146.0" layoutY="23.0" prefHeight="20.0" prefWidth="67.0" text="User ID:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbluserID" layoutX="198.0" layoutY="23.0" prefHeight="20.0" prefWidth="67.0" text="null">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="15.0" layoutY="248.0" onAction="#btnDeleteOnAction" prefHeight="37.0" prefWidth="137.0" style="-fx-background-color: red;" text="Delete User" textFill="WHITE" />
+   </children>
+</AnchorPane>

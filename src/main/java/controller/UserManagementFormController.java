@@ -1,6 +1,9 @@
 package controller;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.jfoenix.controls.JFXTextArea;
+import config.AppModule;
 import dto.UserDto;
 import jakarta.inject.Inject;
 import javafx.collections.FXCollections;
@@ -8,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
@@ -40,11 +44,11 @@ public class UserManagementFormController  implements Initializable {
 
     @FXML
     private TableView<UserDto> tblUser;
-
     @FXML
     private JFXTextArea txtSearch;
     @Inject
     private UserService userService;
+    private Injector injector;
     @FXML
     void btnAddUserOnAction(ActionEvent event) throws IOException {
 
@@ -60,14 +64,42 @@ public class UserManagementFormController  implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        injector = Guice.createInjector(new AppModule());
+
         colUserId.setCellValueFactory(new PropertyValueFactory<>("userId"));
         ColName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         colContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
         colNationalIdNo.setCellValueFactory(new PropertyValueFactory<>("idNumber"));
         loadTable();
+        tblUser.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                try {
+                    openProfile(newSelection,injector);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
     }
+    private void openProfile(UserDto user, Injector injector) throws IOException {
+        URL resource = getClass().getResource("/view/editProfile.fxml");
+        assert resource != null;
+
+        FXMLLoader loader = new FXMLLoader(resource);
+        loader.setControllerFactory(injector::getInstance);
+
+        Parent root = loader.load();
+
+        EditProfileFormController controller = loader.getController();
+        controller.setUser(user);
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
 
     private void loadTable() {
         try {

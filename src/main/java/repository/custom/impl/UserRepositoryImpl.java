@@ -22,12 +22,23 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public boolean update(UserEntity entity) {
-        return false;
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        session.update(entity);
+        session.getTransaction().commit();
+        session.close();
+        return true;
     }
 
     @Override
     public boolean deleteById(Integer integer) {
-        return false;
+
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        session.remove(searchById(integer));
+        session.getTransaction().commit();
+        session.close();
+        return true;
     }
 
     @Override

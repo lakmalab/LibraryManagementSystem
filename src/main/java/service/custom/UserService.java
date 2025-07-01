@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface UserService extends SuperService {
     Boolean addUser(UserDto User) throws SQLException;
+    Boolean deleteUser(UserDto User) throws SQLException;
     Boolean updateUser(UserDto User);
     UserDto searchById(String id) throws SQLException;
     List<UserDto> getAll() throws SQLException;
