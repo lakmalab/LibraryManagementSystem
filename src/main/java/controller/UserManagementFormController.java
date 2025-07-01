@@ -59,6 +59,7 @@ public class UserManagementFormController  implements Initializable {
     }
     @FXML
     void btnSearchOnAction(ActionEvent event) {
+        loadTable(txtSearch.getText().trim());
 
     }
 
@@ -105,6 +106,20 @@ public class UserManagementFormController  implements Initializable {
         try {
             List<UserDto> all = userService.getAll();
             tblUser.setItems(FXCollections.observableArrayList(all));
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, "Failed to load customer data: " + e.getMessage()).show();
+            e.printStackTrace();
+        }
+    }
+    private void loadTable(String idNumber) {
+        try {
+            UserDto user = userService.searchById(idNumber);
+            if (user != null) {
+                tblUser.setItems(FXCollections.observableArrayList(user));
+            } else {
+                loadTable();
+                new Alert(Alert.AlertType.INFORMATION, "No user found with that ID number.").show();
+            }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to load customer data: " + e.getMessage()).show();
             e.printStackTrace();

@@ -36,6 +36,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto searchById(Integer id) throws SQLException {
+        UserEntity entity = repository.searchById(id);
+        if (entity == null) {
+            return null;
+        }
+        UserDto userDto = new ModelMapper().map(entity, UserDto.class);
+        return userDto;
+    }
     public UserDto searchById(String id) throws SQLException {
         UserEntity entity = repository.searchById(id);
         if (entity == null) {
@@ -44,6 +52,8 @@ public class UserServiceImpl implements UserService {
         UserDto userDto = new ModelMapper().map(entity, UserDto.class);
         return userDto;
     }
+
+
 
     @Override
     public List<UserDto> getAll() throws SQLException {
@@ -57,8 +67,4 @@ public class UserServiceImpl implements UserService {
         return userList;
     }
 
-    @Override
-    public List<String> getUserIds() throws SQLException {
-        return List.of();
-    }
 }
