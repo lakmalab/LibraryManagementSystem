@@ -1,11 +1,13 @@
 package controller;
 
 import dto.UserDto;
+import jakarta.inject.Inject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import service.ServiceFactory;
+import javafx.stage.Stage;
 import service.custom.UserService;
 import util.ServiceType;
 
@@ -22,7 +24,9 @@ public class AddNewUser {
 
     @FXML
     private TextField txtName;
-    UserService userService = ServiceFactory.getInstance().getServiceType(ServiceType.USER);
+
+    @Inject
+    private UserService userService;
 
     @FXML
     void btnAddOnAction(ActionEvent event) {
@@ -59,12 +63,16 @@ public class AddNewUser {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Database Error: " + e.getMessage()).show();
             e.printStackTrace(); // Log the error
+        }finally {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
         }
     }
 
     @FXML
     void btnCancelOnAction(ActionEvent event) {
-
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
 }

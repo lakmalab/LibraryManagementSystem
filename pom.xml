@@ -70,6 +70,12 @@
             <artifactId>hibernate-core</artifactId>
             <version>6.6.4.Final</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.inject/guice -->
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>7.0.0</version>
+        </dependency>
     </dependencies>
 
 </project>

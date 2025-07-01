@@ -1,4 +1,7 @@
 package repository.custom.impl;
 
-public class BookRepositoryImpl {
+import repository.custom.BookRepository;
+import service.custom.BookService;
+
+public class BookRepositoryImpl implements BookRepository {
 }

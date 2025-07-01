@@ -2,8 +2,8 @@ package service.custom.impl;
 
 import dto.UserDto;
 import entity.UserEntity;
+import jakarta.inject.Inject;
 import org.modelmapper.ModelMapper;
-import repository.DaoFactory;
 import repository.custom.UserRepository;
 import service.custom.UserService;
 import util.RepositoryType;
@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
-    UserRepository repository = DaoFactory.getInstance().getRepositoryType(RepositoryType.USER);
+
+    @Inject
+    private UserRepository repository;
 
     @Override
     public Boolean addUser(UserDto User) throws SQLException {
@@ -29,8 +31,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto searchById(String id) throws SQLException {
         UserEntity entity = repository.searchById(id);
+        if (entity == null) {
+            return null;
+        }
         UserDto userDto = new ModelMapper().map(entity, UserDto.class);
-
         return userDto;
     }
 

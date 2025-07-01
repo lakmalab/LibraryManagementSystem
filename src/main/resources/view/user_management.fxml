@@ -15,7 +15,7 @@
             <Font name="Arial Black" size="22.0" />
          </font>
       </Label>
-      <JFXTextArea fx:id="txtSearch" layoutX="48.0" layoutY="79.0" prefHeight="20.0" prefWidth="216.0" promptText="Search" />
+      <JFXTextArea fx:id="txtSearch" layoutX="48.0" layoutY="79.0" prefHeight="20.0" prefWidth="216.0" />
       <JFXButton layoutX="546.0" layoutY="84.0" onAction="#btnAddUserOnAction" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: navy blue;" text="Add New User" textFill="#e4e4e4" />
       <JFXButton layoutX="212.0" layoutY="84.0" onAction="#btnSearchOnAction" text="Search" />
       <TableView fx:id="tblUser" layoutX="10.0" layoutY="149.0" prefHeight="342.0" prefWidth="665.0">
