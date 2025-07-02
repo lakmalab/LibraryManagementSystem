@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="511.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BookLendFormController">
+   <children>
+      <Label layoutX="195.0" layoutY="8.0" prefHeight="32.0" prefWidth="342.0" text="Book Record Management" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Black" size="22.0" />
+         </font>
+      </Label>
+      <JFXTextArea fx:id="txtSearch" layoutX="22.0" layoutY="134.0" prefHeight="20.0" prefWidth="216.0" />
+      <JFXButton layoutX="544.0" layoutY="139.0" onAction="#btnAddRecordOnAction" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: navy blue;" text="Add New Record" textFill="#e4e4e4" />
+      <JFXButton layoutX="186.0" layoutY="139.0" onAction="#btnSearchOnAction" text="Search" />
+      <TableView fx:id="tblRecord" layoutX="10.0" layoutY="188.0" prefHeight="303.0" prefWidth="665.0">
+        <columns>
+          <TableColumn fx:id="colRecordId" prefWidth="49.99996852874756" text="RId" />
+          <TableColumn fx:id="ColBook" prefWidth="148.66665267944336" text="Book" />
+            <TableColumn fx:id="colUser" prefWidth="142.66673278808594" text="User" />
+            <TableColumn fx:id="colBorrowDate" prefWidth="112.6666259765625" text="BorrowDate" />
+            <TableColumn fx:id="colReturnDate" prefWidth="120.66659545898438" text="ReturnDate" />
+            <TableColumn fx:id="colFine" prefWidth="88.66670735677087" text="Fine" />
+        </columns>
+      </TableView>
+      <Label layoutX="34.0" layoutY="47.0" text="Date :" />
+      <Label fx:id="lblDate" layoutX="74.0" layoutY="47.0" text="2025-07-02" />
+      <Label layoutX="170.0" layoutY="47.0" text="Time :" />
+      <Label fx:id="lblTIme" layoutX="210.0" layoutY="47.0" text="00:00:00" />
+      <ComboBox fx:id="cmbUserName" layoutX="31.0" layoutY="89.0" prefWidth="150.0" promptText="User" />
+      <ComboBox fx:id="cmbBookCode" layoutX="324.0" layoutY="87.0" prefWidth="150.0" promptText="Book" />
+      <Label fx:id="lblUserEligibility" layoutX="194.0" layoutY="93.0" prefHeight="17.0" prefWidth="93.0" text="Not Eligible" />
+      <Label fx:id="lblBookAvailability" layoutX="500.0" layoutY="91.0" prefHeight="17.0" prefWidth="93.0" text="Not Available" />
+   </children>
+</AnchorPane>

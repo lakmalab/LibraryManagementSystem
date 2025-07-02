@@ -19,12 +19,12 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <JFXButton layoutX="20.0" layoutY="95.0" onAction="#btnHomeFormOnAction" prefHeight="42.0" prefWidth="215.0" text="Home                       " textFill="WHITE">
+      <JFXButton layoutX="-1.0" layoutY="95.0" onAction="#btnHomeFormOnAction" prefHeight="42.0" prefWidth="226.0" text="              Home                                  " textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="-1.0" layoutY="137.0" onAction="#btnUserManagmentFormOnAction" prefHeight="49.0" prefWidth="199.0" text="   User Management" textFill="WHITE">
+      <JFXButton layoutX="-1.0" layoutY="137.0" onAction="#btnUserManagmentFormOnAction" prefHeight="49.0" prefWidth="226.0" text="   User Management          " textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
@@ -36,7 +36,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton layoutX="3.0" layoutY="187.0" onAction="#btnBookManagementFormOnAction" prefHeight="46.0" prefWidth="206.0" text="   Book Manmagement" textFill="WHITE">
+      <JFXButton layoutY="187.0" onAction="#btnBookManagementFormOnAction" prefHeight="46.0" prefWidth="226.0" text="   Book Management         " textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
@@ -58,7 +58,7 @@
             <Blend />
          </effect>
       </ImageView>
-      <JFXButton layoutX="-52.0" layoutY="455.0" onAction="#btnLogoutOnAction" prefHeight="42.0" prefWidth="215.0" text="LogOut" textAlignment="CENTER" textFill="WHITE">
+      <JFXButton layoutX="3.0" layoutY="455.0" onAction="#btnLogoutOnAction" prefHeight="42.0" prefWidth="226.0" text="    LogOut                                                  " textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="9.0" />
          </font>
@@ -70,10 +70,22 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <ImageView fitHeight="23.0" fitWidth="34.0" layoutX="28.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="23.0" fitWidth="34.0" layoutX="23.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/home.png" />
          </image>
       </ImageView>
+      <JFXButton layoutX="4.0" layoutY="235.0" onAction="#btnBookLendOnAction" prefHeight="46.0" prefWidth="226.0" text="   Book Lend Record             " textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/lend.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
    </children>
 </AnchorPane>

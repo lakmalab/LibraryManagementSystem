@@ -67,4 +67,14 @@ public class UserServiceImpl implements UserService {
         return userList;
     }
 
+    @Override
+    public List<String> getUserNames() throws SQLException {
+        List<UserDto> all = getAll();
+        ArrayList<String> userIdList = new ArrayList<>();
+        all.forEach(user->{
+            userIdList.add(String.valueOf(user.getName()));
+        });
+        return userIdList;
+    }
+
 }

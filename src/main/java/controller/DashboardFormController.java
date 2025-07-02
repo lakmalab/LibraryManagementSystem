@@ -66,4 +66,15 @@ public class DashboardFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         injector = Guice.createInjector(new AppModule());
     }
+
+    public void btnBookLendOnAction(ActionEvent actionEvent) throws IOException {
+        URL resource = this.getClass().getResource("/view/book_lend.fxml");
+
+        assert resource != null;
+        FXMLLoader loader = new FXMLLoader(resource);
+        loader.setControllerFactory(injector::getInstance);
+        Parent load = loader.load();
+        this.root.getChildren().clear();
+        this.root.getChildren().add(load);
+    }
 }
