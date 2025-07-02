@@ -19,6 +19,14 @@ public class BookRepositoryImpl implements BookRepository {
         }
     }
 
+    public BookEntity searchById(Long id) {
+        try (Session session = HibernateUtil.getSession()) {
+            return session.createQuery("FROM BookEntity WHERE bookID = :id", BookEntity.class)
+                    .setParameter("id", id)
+                    .uniqueResult();
+        }
+    }
+
     @Override
     public Boolean add(BookEntity entity) {
         Session session = HibernateUtil.getSession();
@@ -35,5 +43,26 @@ public class BookRepositoryImpl implements BookRepository {
         try (Session session = HibernateUtil.getSession()) {
             return session.createQuery("FROM BookEntity", BookEntity.class).list();
         }
+    }
+
+    @Override
+    public Boolean update(BookEntity entity) {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        session.update(entity);
+        session.getTransaction().commit();
+        session.close();
+        return true;
+
+    }
+
+    @Override
+    public Boolean deleteById(Long bookID) {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        session.remove(searchById(bookID));
+        session.getTransaction().commit();
+        session.close();
+        return true;
     }
 }

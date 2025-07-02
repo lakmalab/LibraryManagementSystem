@@ -1,13 +1,10 @@
 package service.custom.impl;
 
 import dto.BookDto;
-import dto.UserDto;
 import entity.BookEntity;
-import entity.UserEntity;
 import jakarta.inject.Inject;
 import org.modelmapper.ModelMapper;
 import repository.custom.BookRepository;
-import repository.custom.UserRepository;
 import service.custom.BookService;
 
 import java.sql.SQLException;
@@ -53,7 +50,19 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Boolean deleteById(String id) {
-        return null;
+    public Boolean deleteById(Long id) {
+        return  repository.deleteById(id);
+    }
+
+    @Override
+    public Boolean updateUser(BookDto newUser) {
+        BookEntity entity = new ModelMapper().map(newUser, BookEntity.class);
+        return repository.update(entity);
+    }
+
+    @Override
+    public Boolean deleteBook(BookDto newBook) {
+        BookEntity entity = new ModelMapper().map(newBook, BookEntity.class);
+        return repository.deleteById(entity.getBookID());
     }
 }

@@ -18,7 +18,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class EditProfileFormController implements Initializable {
+public class EditProfileFormController {
 
     public Label lbluserID;
     @FXML
@@ -79,10 +79,7 @@ public class EditProfileFormController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
 
-    }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
         UserDto newUser = new UserDto(user.getUserId(), null,null, null, null);

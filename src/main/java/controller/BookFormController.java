@@ -59,7 +59,7 @@ public class BookFormController implements Initializable {
 
     @FXML
     void btnSearchOnAction(ActionEvent event) {
-
+        loadList(txtSearch.getText().trim());
     }
     private void loadList() {
         try {
@@ -96,12 +96,11 @@ public class BookFormController implements Initializable {
                         imageView.setFitHeight(150);
                         imageView.setPreserveRatio(true);
 
-
                         VBox labelBox = new VBox(5);
                         labelBox.setAlignment(Pos.TOP_LEFT);
 
                         Label titleLabel = new Label(item.getTitle());
-                        titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: navyblue;" );
+                        titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #000080;" );
                         Label authorLabel = new Label("By " + item.getAuthor());
                         authorLabel.setStyle("-fx-font-size: 10px; -fx-font-weight: bold;" );
                         Label genre = new Label("Genre " +item.getGenre().toString());
@@ -125,15 +124,126 @@ public class BookFormController implements Initializable {
 
                         setText(null);
                         setGraphic(hBox);
+
                     }
                 }
             });
-
+            bookListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    System.out.println("Selected Book: " + newValue.getTitle());
+                    try {
+                        openBookProfile(newValue,injector);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "Failed to load customer data: " + e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, "Failed to load Book data: " + e.getMessage()).show();
             e.printStackTrace();
         }
     }
+    private void loadList(String title) {
+        try {
+            BookDto all = bookService.searchById(title);
+            bookListView.setItems(FXCollections.observableArrayList(all));
+            bookListView.setCellFactory(param -> new ListCell<BookDto>() {
+                @Override
+                protected void updateItem(BookDto item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (empty || item == null) {
+                        setText(null);
+                        setGraphic(null);
+                    } else {
+                        HBox hBox = new HBox(10);
+                        hBox.setAlignment(Pos.CENTER_LEFT);
+
+                        VBox layout = new VBox();
+                        String coverUrl = item.getCover();
+                        Image coverImage;
+
+                        try {
+                            if (coverUrl != null && !coverUrl.isEmpty()) {
+                                coverImage = new Image(coverUrl, true);
+                            } else {
+                                coverImage = new Image("images/cover.png");
+                            }
+                        } catch (Exception e) {
+                            coverImage = new Image("images/cover.png");
+                        }
+
+                        ImageView imageView = new ImageView(coverImage);
+                        imageView.setFitWidth(100);
+                        imageView.setFitHeight(150);
+                        imageView.setPreserveRatio(true);
+
+                        VBox labelBox = new VBox(5);
+                        labelBox.setAlignment(Pos.TOP_LEFT);
+
+                        Label titleLabel = new Label(item.getTitle());
+                        titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #000080;" );
+                        Label authorLabel = new Label("By " + item.getAuthor());
+                        authorLabel.setStyle("-fx-font-size: 10px; -fx-font-weight: bold;" );
+                        Label genre = new Label("Genre " +item.getGenre().toString());
+                        genre.setStyle("-fx-font-size: 10px; -fx-font-weight: bold;" );
+                        Label availibility;
+                        if (item.getAvailable() == false) {
+                            availibility = new Label("Availability :" +"Not Available" );
+                            availibility.setStyle("-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: red;");
+                        } else {
+                            availibility = new Label("Availability :" +"Available" );
+                            availibility.setStyle("-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: green;");
+                        }
+
+
+                        Label description = new Label(item.getDescription());
+
+
+                        labelBox.getChildren().addAll(titleLabel, authorLabel,genre,availibility,description);
+
+                        hBox.getChildren().addAll(imageView, labelBox);
+
+                        setText(null);
+                        setGraphic(hBox);
+
+                    }
+                }
+            });
+            bookListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    System.out.println("Selected Book: " + newValue.getTitle());
+                    try {
+                        openBookProfile(newValue,injector);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, "Failed to load Book data: " + e.getMessage()).show();
+            e.printStackTrace();
+        }
+    }
+
+    private void openBookProfile(BookDto newValue, Injector injector) throws IOException {
+        URL resource = getClass().getResource("/view/editBookProfile.fxml");
+        assert resource != null;
+
+        FXMLLoader loader = new FXMLLoader(resource);
+        loader.setControllerFactory(injector::getInstance);
+
+        Parent root = loader.load();
+
+        EditBookProfileFormController controller = loader.getController();
+        controller.setUser(newValue);
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         injector = Guice.createInjector(new AppModule());

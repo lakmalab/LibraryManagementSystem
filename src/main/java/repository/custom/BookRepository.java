@@ -10,4 +10,8 @@ public interface BookRepository {
     Boolean add(BookEntity entity);
 
     List<BookEntity> getAll();
+
+    Boolean update(BookEntity entity);
+
+    Boolean deleteById(Long bookID);
 }
