@@ -52,8 +52,15 @@ public class UserManagementFormController  implements Initializable {
     @FXML
     void btnAddUserOnAction(ActionEvent event) throws IOException {
 
+        URL resource = getClass().getResource("/view/addNewUser.fxml");
+        assert resource != null;
+
+        FXMLLoader loader = new FXMLLoader(resource);
+        loader.setControllerFactory(injector::getInstance);
+
+        Parent root = loader.load();
         Stage stage = new Stage();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/addNewUser.fxml"))));
+        stage.setScene(new Scene(root));
         stage.show();
 
     }

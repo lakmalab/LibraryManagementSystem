@@ -1,5 +1,6 @@
 package dto;
 
+import enums.Genre;
 import lombok.*;
 
 @Data
@@ -10,6 +11,8 @@ public class BookDto {
     private Long  isbn;
     private String title;
     private String author;
-    private String genre;
+    private Genre genre;
+    private String cover;
+    private String description;
     private Boolean available;
 }

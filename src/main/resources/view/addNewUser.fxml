@@ -15,7 +15,7 @@
          </font>
       </Label>
       <Label layoutX="25.0" layoutY="67.0" prefHeight="20.0" prefWidth="67.0" text="Name :" />
-      <Label layoutX="24.0" layoutY="140.0" prefHeight="20.0" prefWidth="67.0" text="Adress :" />
+      <Label layoutX="24.0" layoutY="140.0" prefHeight="20.0" prefWidth="67.0" text="Address :" />
       <Label layoutX="24.0" layoutY="207.0" prefHeight="20.0" prefWidth="67.0" text="Contact :" />
       <JFXButton layoutX="33.0" layoutY="259.0" onAction="#btnCancelOnAction" prefHeight="37.0" prefWidth="86.0" style="-fx-background-color: red;" text="Cancel" textFill="WHITE" />
       <JFXButton layoutX="180.0" layoutY="259.0" onAction="#btnAddOnAction" prefHeight="37.0" prefWidth="86.0" style="-fx-background-color: navy blue;" text="Add" textFill="WHITE" />

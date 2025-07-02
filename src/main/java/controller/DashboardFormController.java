@@ -52,7 +52,7 @@ public class DashboardFormController implements Initializable {
 
     @FXML
     void btnBookManagementFormOnAction(ActionEvent event) throws IOException {
-        URL resource = this.getClass().getResource("/view/.fxml");
+        URL resource = this.getClass().getResource("/view/book_management.fxml");
 
         assert resource != null;
         FXMLLoader loader = new FXMLLoader(resource);
