@@ -13,4 +13,9 @@ public class UserDto {
     private String idNumber;
     private String address;
     private String contact;
+
+    @Override
+    public String toString() {
+        return ("" + name);
+    }
 }

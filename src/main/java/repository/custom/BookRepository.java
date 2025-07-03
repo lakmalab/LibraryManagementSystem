@@ -7,6 +7,8 @@ import java.util.List;
 public interface BookRepository {
     BookEntity searchById(String id);
 
+    BookEntity searchById(Long id);
+
     Boolean add(BookEntity entity);
 
     List<BookEntity> getAll();

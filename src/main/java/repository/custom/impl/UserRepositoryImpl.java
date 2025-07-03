@@ -48,7 +48,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public UserEntity searchById(String id) {
         try (Session session = HibernateUtil.getSession()) {
-            return session.createQuery("FROM UserEntity WHERE idNumber = :id", UserEntity.class)
+            return session.createQuery("FROM UserEntity WHERE name = :id", UserEntity.class)
                     .setParameter("id", id)
                     .uniqueResult();
         }

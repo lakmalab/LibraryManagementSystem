@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class BorrowRecordEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int recordId;
+    private Integer recordId;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

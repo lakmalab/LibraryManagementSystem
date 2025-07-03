@@ -16,4 +16,8 @@ public interface BookService extends SuperService {
     Boolean updateUser(BookDto newUser);
 
     Boolean deleteBook(BookDto newBook);
+
+    List<String> getBookNames() throws SQLException;
+
+    void updateBookAvailability(Long bookID, boolean b);
 }

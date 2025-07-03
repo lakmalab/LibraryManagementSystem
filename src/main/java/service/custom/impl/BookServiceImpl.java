@@ -55,8 +55,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Boolean updateUser(BookDto newUser) {
-        BookEntity entity = new ModelMapper().map(newUser, BookEntity.class);
+    public Boolean updateUser(BookDto newBook) {
+        BookEntity entity = new ModelMapper().map(newBook, BookEntity.class);
         return repository.update(entity);
     }
 
@@ -64,5 +64,24 @@ public class BookServiceImpl implements BookService {
     public Boolean deleteBook(BookDto newBook) {
         BookEntity entity = new ModelMapper().map(newBook, BookEntity.class);
         return repository.deleteById(entity.getBookID());
+    }
+
+    @Override
+    public List<String> getBookNames() throws SQLException {
+        List<BookDto> all = getAll();
+        ArrayList<String> bookIdList = new ArrayList<>();
+        all.forEach(book->{
+            bookIdList.add(String.valueOf(book.getTitle()));
+        });
+        return bookIdList;
+    }
+
+    @Override
+    public void updateBookAvailability(Long bookID, boolean b) {
+        BookEntity bookEntity = repository.searchById(bookID);
+        if (bookEntity != null) {
+            bookEntity.setAvailable(b);
+            repository.update(bookEntity);
+        }
     }
 }

@@ -1,10 +1,8 @@
 package repository.custom.impl;
 
 import entity.BookEntity;
-import entity.UserEntity;
 import org.hibernate.Session;
 import repository.custom.BookRepository;
-import service.custom.BookService;
 import util.HibernateUtil;
 
 import java.util.List;
@@ -18,7 +16,7 @@ public class BookRepositoryImpl implements BookRepository {
                     .uniqueResult();
         }
     }
-
+    @Override
     public BookEntity searchById(Long id) {
         try (Session session = HibernateUtil.getSession()) {
             return session.createQuery("FROM BookEntity WHERE bookID = :id", BookEntity.class)

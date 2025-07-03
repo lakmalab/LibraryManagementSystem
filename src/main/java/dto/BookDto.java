@@ -15,4 +15,9 @@ public class BookDto {
     private String cover;
     private String description;
     private Boolean available;
+
+    @Override
+    public String toString() {
+        return ("" + title);
+    }
 }
