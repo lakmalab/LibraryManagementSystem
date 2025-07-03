@@ -13,11 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import service.custom.UserService;
 
-
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
-
 public class EditProfileFormController {
 
     public Label lbluserID;

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="489.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditRecordProfileFormController">
+   <children>
+      <Label layoutX="17.0" layoutY="3.0" prefHeight="37.0" prefWidth="149.0" text="Edit Record">
+         <font>
+            <Font name="Arial Black" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="22.0" layoutY="206.0" prefHeight="20.0" prefWidth="77.0" text="BookTitle :" />
+      <Label layoutX="22.0" layoutY="396.0" prefHeight="20.0" prefWidth="67.0" text="Fine (Rs.) :" />
+      <JFXButton layoutX="13.0" layoutY="437.0" onAction="#btnCancelOnAction" prefHeight="37.0" prefWidth="86.0" style="-fx-background-color: red;" text="Cancel" textFill="WHITE" />
+      <JFXButton layoutX="224.0" layoutY="437.0" onAction="#btnUpdateOnAction" prefHeight="37.0" prefWidth="86.0" style="-fx-background-color: navy blue;" text="Update" textFill="WHITE" />
+      <TextField fx:id="txtTitle" layoutX="106.0" layoutY="201.0" prefHeight="29.0" prefWidth="199.0" />
+      <Label layoutX="5.0" layoutY="287.0" prefHeight="20.0" prefWidth="86.0" text="Borrowed Date :" />
+      <TextField fx:id="txtFine" layoutX="105.0" layoutY="391.0" prefHeight="29.0" prefWidth="199.0" />
+      <ImageView fx:id="imgCover" fitHeight="150.0" fitWidth="149.0" layoutX="131.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/cover.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="22.0" layoutY="51.0" prefHeight="20.0" prefWidth="67.0" text="Cover :" />
+      <Label layoutX="24.0" layoutY="245.0" prefHeight="20.0" prefWidth="77.0" text="User :" />
+      <TextField fx:id="txtUser" layoutX="106.0" layoutY="240.0" prefHeight="29.0" prefWidth="199.0" />
+      <DatePicker fx:id="dateBorrowed" layoutX="107.0" layoutY="280.0" prefHeight="29.0" prefWidth="199.0" />
+      <Label layoutX="13.0" layoutY="350.0" prefHeight="20.0" prefWidth="86.0" text="Returned Date :" />
+      <DatePicker fx:id="dateReturened" layoutX="107.0" layoutY="345.0" prefHeight="29.0" prefWidth="199.0" />
+      <JFXCheckBox fx:id="chbReturened" layoutX="107.0" layoutY="317.0" text="Book Returned" />
+   </children>
+</AnchorPane>

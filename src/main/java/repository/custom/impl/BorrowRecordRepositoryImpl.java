@@ -36,7 +36,12 @@ public class BorrowRecordRepositoryImpl implements BorrowRecordRepository {
 
     @Override
     public Boolean update(BorrowRecordEntity entity) {
-        return null;
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        session.update(entity);
+        session.getTransaction().commit();
+        session.close();
+        return true;
     }
 
     @Override

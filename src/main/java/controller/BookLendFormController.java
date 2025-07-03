@@ -1,8 +1,10 @@
 package controller;
 
+import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.jfoenix.controls.JFXTextArea;
+import config.AppModule;
 import dto.BookDto;
 import dto.BorrowRecordDto;
 import dto.UserDto;
@@ -12,8 +14,11 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
@@ -22,11 +27,13 @@ import service.custom.BookService;
 import service.custom.BorrowRecordService;
 import service.custom.UserService;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -108,7 +115,7 @@ public class BookLendFormController implements Initializable {
             }
 
             BorrowRecordDto newRecord = new BorrowRecordDto(null, userDto, bookDto, LocalDate.now(),
-                    null, 1000.00);
+                    null, 0.0);
 
             boolean success = borrowRecordService.add(newRecord);
 
@@ -133,6 +140,8 @@ public class BookLendFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        injector = Guice.createInjector(new AppModule());
+
         colRecordId.setCellValueFactory(new PropertyValueFactory<>("recordId"));
         colUser.setCellValueFactory(new PropertyValueFactory<>("user"));
         ColBook.setCellValueFactory(new PropertyValueFactory<>("book"));
@@ -140,11 +149,38 @@ public class BookLendFormController implements Initializable {
         colReturnDate.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
         colFine.setCellValueFactory(new PropertyValueFactory<>("fine"));
 
+        tblRecord.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                try {
+                    openRecord(newSelection,injector);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
         loadDateAndTime();
         loadUserNames();
         loadBooks();
         loadTable();
+
+    }
+
+    private void openRecord(BorrowRecordDto recordDto, Injector injector) throws IOException {
+        URL resource = getClass().getResource("/view/editRecordProfile.fxml");
+        assert resource != null;
+
+        FXMLLoader loader = new FXMLLoader(resource);
+        loader.setControllerFactory(injector::getInstance);
+
+        Parent root = loader.load();
+
+        EditRecordProfileFormController controller = loader.getController();
+        controller.setRecord(recordDto);
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     private void loadBooks() {
@@ -166,8 +202,40 @@ public class BookLendFormController implements Initializable {
     }
     private void loadTable() {
         List<BorrowRecordDto> all = borrowRecordService.getAll();
+        calculateFine(all);
         tblRecord.setItems(FXCollections.observableArrayList(all));
     }
+
+    private void calculateFine(List<BorrowRecordDto> all) {
+        double finePerDay = 10.0;
+        int allowedDays = 14;
+
+        for (BorrowRecordDto dto : all) {
+            double fine = 0;
+            LocalDate borrowDate = dto.getBorrowDate();
+            LocalDate returnDate = dto.getReturnDate();
+            LocalDate compareDate = (returnDate != null) ? returnDate : LocalDate.now();
+
+            long days = ChronoUnit.DAYS.between(borrowDate, compareDate);
+
+            if (days > allowedDays) {
+                fine = (days - allowedDays) * finePerDay;
+                dto.setFine(fine);
+            } else {
+                dto.setFine(0.0);
+            }
+            BorrowRecordDto newRecord = new BorrowRecordDto(
+                    dto.getRecordId(),
+                    dto.getUser(),
+                    dto.getBook(),
+                    borrowDate,
+                    returnDate,
+                    fine
+            );
+            borrowRecordService.update(newRecord);
+        }
+    }
+
 
     private void loadDateAndTime() {
         Date date = new Date();

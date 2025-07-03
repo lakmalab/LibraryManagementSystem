@@ -39,7 +39,8 @@ public class BorrowRecordServiceImpl implements BorrowRecordService {
 
     @Override
     public Boolean update(BorrowRecordDto dto) {
-        return null;
+        BorrowRecordEntity entity = new ModelMapper().map(dto, BorrowRecordEntity.class);
+        return repository.update(entity);
     }
 
     @Override

@@ -67,7 +67,7 @@ public class DashboardFormController implements Initializable {
         injector = Guice.createInjector(new AppModule());
     }
 
-    public void btnBookLendOnAction(ActionEvent actionEvent) throws IOException {
+    public void btnBookLendOnAction(ActionEvent event) throws IOException {
         URL resource = this.getClass().getResource("/view/book_lend.fxml");
 
         assert resource != null;
