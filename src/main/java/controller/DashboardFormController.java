@@ -21,7 +21,7 @@ public class DashboardFormController implements Initializable {
     private Injector injector;
     @FXML
     void btnHomeFormOnAction(ActionEvent event) throws IOException {
-        URL resource = this.getClass().getResource("/view/.fxml");
+        URL resource = this.getClass().getResource("/view/home.fxml");
 
         assert resource != null;
         FXMLLoader loader = new FXMLLoader(resource);
@@ -65,6 +65,20 @@ public class DashboardFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         injector = Guice.createInjector(new AppModule());
+        URL resource = this.getClass().getResource("/view/home.fxml");
+
+        assert resource != null;
+        FXMLLoader loader = new FXMLLoader(resource);
+        loader.setControllerFactory(injector::getInstance);
+        Parent load = null;
+        try {
+            load = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        this.root.getChildren().clear();
+        this.root.getChildren().add(load);
+
     }
 
     public void btnBookLendOnAction(ActionEvent event) throws IOException {
@@ -76,5 +90,9 @@ public class DashboardFormController implements Initializable {
         Parent load = loader.load();
         this.root.getChildren().clear();
         this.root.getChildren().add(load);
+
+
     }
+
+
 }

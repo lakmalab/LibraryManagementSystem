@@ -3,6 +3,7 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -29,9 +30,13 @@ public class Librarylogin {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/dashboard.fxml"))));
             stage.show();
             new Alert(Alert.AlertType.INFORMATION,"Hello "+username+" \n Welcome Back").show();
+            Stage stage2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage2.close();
         }else {
             new Alert(Alert.AlertType.INFORMATION,"Error There's no User With the name "+txtUser.getText()+" \n Please Try again").show();
         }
+
     }
+
 
 }
