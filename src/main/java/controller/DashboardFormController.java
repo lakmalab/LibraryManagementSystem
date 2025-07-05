@@ -7,8 +7,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -45,9 +49,13 @@ public class DashboardFormController implements Initializable {
         this.root.getChildren().add(load);
     }
     @FXML
-    void btnLogoutOnAction(ActionEvent event) {
+    void btnLogoutOnAction(ActionEvent event)  throws IOException{
+            Stage stage = new Stage();
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/library_login.fxml"))));
+            stage.show();
 
-
+            Stage stage2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage2.close();
     }
 
     @FXML
@@ -95,4 +103,14 @@ public class DashboardFormController implements Initializable {
     }
 
 
+    public void btnReportOnAction(ActionEvent actionEvent) throws IOException {
+        URL resource = this.getClass().getResource("/view/report_management.fxml");
+
+        assert resource != null;
+        FXMLLoader loader = new FXMLLoader(resource);
+        loader.setControllerFactory(injector::getInstance);
+        Parent load = loader.load();
+        this.root.getChildren().clear();
+        this.root.getChildren().add(load);
+    }
 }

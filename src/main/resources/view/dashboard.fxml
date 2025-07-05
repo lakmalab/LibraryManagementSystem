@@ -87,5 +87,17 @@
             </ImageView>
          </graphic>
       </JFXButton>
+      <JFXButton layoutX="2.0" layoutY="281.0" onAction="#btnReportOnAction" prefHeight="46.0" prefWidth="226.0" text="   Export Reports                 " textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/report.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
    </children>
 </AnchorPane>

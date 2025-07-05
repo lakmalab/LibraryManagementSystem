@@ -20,7 +20,7 @@ public class Starter extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/library_login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/dashboard.fxml"));
         loader.setControllerFactory(clazz -> {
             Object controller = injector.getInstance(clazz);
             injector.injectMembers(controller);

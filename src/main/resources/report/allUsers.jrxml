@@ -1,0 +1,179 @@
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 7.0.3-41034ca841d452f3305ba55b9042260aaa1ab5dd  -->
+<jasperReport name="allUsers" language="java" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (4)"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50.0" bold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18.0" bold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14.0" bold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle mode="Opaque" backcolor="#EEEFF0">
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+		</conditionalStyle>
+	</style>
+	<style name="Table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<leftPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+			<rightPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#CACED0">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle backcolor="#D8D8D8">
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+		</conditionalStyle>
+	</style>
+	<dataset name="tableDataset" uuid="f13e6d36-5148-4ecc-bbe3-3035def80980">
+		<query language="sql"><![CDATA[]]></query>
+	</dataset>
+	<query language="SQL"><![CDATA[SELECT *  FROM  librarymanagementsystem.user ]]></query>
+	<field name="userId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="userId"/>
+		<property name="com.jaspersoft.studio.field.label" value="userId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="user"/>
+	</field>
+	<field name="address" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="address"/>
+		<property name="com.jaspersoft.studio.field.label" value="address"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="user"/>
+	</field>
+	<field name="contact" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="contact"/>
+		<property name="com.jaspersoft.studio.field.label" value="contact"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="user"/>
+	</field>
+	<field name="name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name"/>
+		<property name="com.jaspersoft.studio.field.label" value="name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="user"/>
+	</field>
+	<field name="idNumber" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="idNumber"/>
+		<property name="com.jaspersoft.studio.field.label" value="idNumber"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="user"/>
+	</field>
+	<title height="196" splitType="Stretch">
+		<element kind="line" uuid="806ce5df-1219-4876-ae0c-ca7405b1f246" x="0" y="80" width="556" height="1">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+		<element kind="staticText" uuid="0f86baff-6386-4f3f-b3fe-2388707babe8" x="415" y="10" width="50" height="20" hTextAlign="Right">
+			<text><![CDATA[Date:]]></text>
+			<box rightPadding="4"/>
+		</element>
+		<element kind="textField" uuid="bb10dbe1-0a4f-4722-9953-c163b63cf979" x="465" y="10" width="84" height="20" pattern="EEEEE dd MMMMM yyyy">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+		<element kind="textField" uuid="3836ce65-eca3-4cad-a6de-b1818def0a2b" x="465" y="30" width="84" height="20" pattern="EEEEE dd MMMMM yyyy">
+			<expression><![CDATA["INV0001"]]></expression>
+		</element>
+		<element kind="staticText" uuid="0b3f9342-da78-4cfa-9fc5-2301c4749678" x="415" y="30" width="50" height="20" hTextAlign="Right">
+			<text><![CDATA[Report #]]></text>
+			<box rightPadding="4"/>
+		</element>
+		<element kind="staticText" uuid="e622555d-198b-4ccd-a4a1-c59c53304058" x="0" y="0" width="210" height="25" fontSize="19.0" bold="true">
+			<text><![CDATA[BookLib (PVT) Ltd]]></text>
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+		<element kind="staticText" uuid="b8cc42fd-b569-497d-834d-7e854040ad18" x="0" y="55" width="205" height="15">
+			<text><![CDATA[+94 123 456 789, booklib@sample.com]]></text>
+		</element>
+		<element kind="staticText" uuid="c226e44d-3bb5-4145-b0b3-903bf1d79fde" x="0" y="25" width="205" height="15">
+			<text><![CDATA[Mr. H.M. Sumathipala Liyanage]]></text>
+		</element>
+		<element kind="staticText" uuid="b96f7183-44f8-43ad-ba60-43d8fbf50b6e" x="0" y="40" width="205" height="15">
+			<text><![CDATA[Rajagiriya]]></text>
+		</element>
+		<element kind="staticText" uuid="01c18fac-ef21-4a2e-8c35-cc2762b941eb" x="40" y="90" width="450" height="30" fontSize="18.0" hTextAlign="Center">
+			<text><![CDATA[All User Details]]></text>
+		</element>
+	</title>
+	<columnHeader height="20">
+		<element kind="staticText" uuid="f4da85d1-f584-4a02-b6ca-5fe06050e8f1" positionType="Float" x="-3" y="-70" width="111" height="20" forecolor="#000000" fontName="Arial" fontSize="12.0" bold="true" style="Column header">
+			<text><![CDATA[userId]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4a4e97f6-f7c5-4d7b-b6b4-844b05156e89"/>
+		</element>
+		<element kind="staticText" uuid="74cb6a30-bf12-40a2-954f-e23b29c694f2" positionType="Float" x="108" y="-70" width="111" height="20" forecolor="#000000" fontName="Arial" fontSize="12.0" bold="true" style="Column header">
+			<text><![CDATA[address]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ea9a19c5-38bb-4efb-8be6-8be5562cfd77"/>
+		</element>
+		<element kind="staticText" uuid="bec531db-fc2b-49ce-b496-ab0649950d84" positionType="Float" x="219" y="-70" width="111" height="20" forecolor="#000000" fontName="Arial" fontSize="12.0" bold="true" style="Column header">
+			<text><![CDATA[contact]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d4905f65-5604-40f3-bad5-f18ffa13d6bb"/>
+		</element>
+		<element kind="staticText" uuid="21c267d7-032a-4d3c-b365-b91d8b93dab3" positionType="Float" x="330" y="-70" width="111" height="20" forecolor="#000000" fontName="Arial" fontSize="12.0" bold="true" style="Column header">
+			<text><![CDATA[name]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a389b0ad-68cf-44e5-9e96-7db079f2311a"/>
+		</element>
+		<element kind="staticText" uuid="3efe2bc4-7262-4394-b1bd-40a6150359ad" positionType="Float" x="441" y="-70" width="111" height="20" forecolor="#000000" fontName="Arial" fontSize="12.0" bold="true" style="Column header">
+			<text><![CDATA[idNumber]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="76d87994-2cec-4a0b-a6c9-5436c582ab30"/>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<element kind="textField" uuid="5e5cba3b-57f9-4728-b9c0-929769b0194f" positionType="Float" x="-3" y="-70" width="111" height="20" fontName="Arial" fontSize="12.0" textAdjust="StretchHeight" blankWhenNull="true" bold="false" style="Detail">
+				<expression><![CDATA[$F{userId}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4a4e97f6-f7c5-4d7b-b6b4-844b05156e89"/>
+			</element>
+			<element kind="textField" uuid="3b7ffc60-b2ec-4bbc-973a-c5374e9fe545" positionType="Float" x="108" y="-70" width="111" height="20" fontName="Arial" fontSize="12.0" textAdjust="StretchHeight" blankWhenNull="true" bold="false" style="Detail">
+				<expression><![CDATA[$F{address}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ea9a19c5-38bb-4efb-8be6-8be5562cfd77"/>
+			</element>
+			<element kind="textField" uuid="b14b22ef-dffa-41b3-84b7-cc6caa472d18" positionType="Float" x="219" y="-70" width="111" height="20" fontName="Arial" fontSize="12.0" textAdjust="StretchHeight" blankWhenNull="true" bold="false" style="Detail">
+				<expression><![CDATA[$F{contact}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d4905f65-5604-40f3-bad5-f18ffa13d6bb"/>
+			</element>
+			<element kind="textField" uuid="d8888f71-4781-4702-a305-74cddf7b763c" positionType="Float" x="330" y="-70" width="111" height="20" fontName="Arial" fontSize="12.0" textAdjust="StretchHeight" blankWhenNull="true" bold="false" style="Detail">
+				<expression><![CDATA[$F{name}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a389b0ad-68cf-44e5-9e96-7db079f2311a"/>
+			</element>
+			<element kind="textField" uuid="cd23bf55-4d8b-4a1e-b944-105fd9df41a4" positionType="Float" x="441" y="-70" width="111" height="20" fontName="Arial" fontSize="12.0" textAdjust="StretchHeight" blankWhenNull="true" bold="false" style="Detail">
+				<expression><![CDATA[$F{idNumber}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="76d87994-2cec-4a0b-a6c9-5436c582ab30"/>
+			</element>
+		</band>
+	</detail>
+	<lastPageFooter height="177">
+		<element kind="staticText" uuid="1a0d7088-5af7-4865-8be1-41ec5f51fb36" positionType="Float" x="-1" y="30" width="261" height="101">
+			<text><![CDATA[Your notes here]]></text>
+			<box>
+				<topPen lineWidth="1.1" lineStyle="Dashed"/>
+				<leftPen lineWidth="1.1" lineStyle="Dashed"/>
+				<bottomPen lineWidth="1.1" lineStyle="Dashed"/>
+				<rightPen lineWidth="1.1" lineStyle="Dashed"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="36aa233d-4305-48e6-974a-1bbf89bb3c8f" positionType="Float" mode="Opaque" x="0" y="147" width="556" height="30" backcolor="#E6E8E9" fontName="Serif" fontSize="9.0" italic="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[THANK YOU!]]></text>
+		</element>
+	</lastPageFooter>
+</jasperReport>
