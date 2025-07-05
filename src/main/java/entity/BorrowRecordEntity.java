@@ -31,4 +31,6 @@ public class BorrowRecordEntity {
     private LocalDate returnDate;
 
     private double fine;
+
+    private boolean paidFine;
 }

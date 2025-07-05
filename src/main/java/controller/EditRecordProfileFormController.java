@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
 
 public class EditRecordProfileFormController implements Initializable {
 
+    public JFXCheckBox chbFinePaid;
     @FXML
     private JFXCheckBox chbReturened;
 
@@ -30,6 +31,7 @@ public class EditRecordProfileFormController implements Initializable {
 
     @FXML
     private DatePicker dateReturened;
+    private boolean isPaid = false;
 
     @FXML
     private ImageView imgCover;
@@ -70,18 +72,14 @@ public class EditRecordProfileFormController implements Initializable {
 
         try {
 
-
             bookDto = bookService.searchById(bookname);
-
-
             BorrowRecordDto newRecord = new BorrowRecordDto(newSelection.getRecordId(), newSelection.getUser(), newSelection.getBook(), newSelection.getBorrowDate(),
-                    returenddate, 1000.00);
+                    returenddate, 1000.00,isPaid);
 
             boolean success = borrowRecordService.update(newRecord);
 
             if (success) {
                 if (chbReturened.isSelected()) {
-
                     bookService.updateBookAvailability(bookDto.getBookID(), true);
                 }
                 new Alert(Alert.AlertType.INFORMATION, "Borrow record added successfully!").show();
@@ -123,7 +121,17 @@ public class EditRecordProfileFormController implements Initializable {
                 dateReturened.setDisable(true);
             }
         });
-
+        chbFinePaid.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                isPaid = true;
+                txtFine.setText(String.valueOf(0.00));
+                txtFine.setDisable(false);
+            } else {
+                isPaid = false;
+                txtFine.setText(String.valueOf(0.00));
+                txtFine.setDisable(true);
+            }
+        });
         dateReturened.setDisable(true);
     }
 }

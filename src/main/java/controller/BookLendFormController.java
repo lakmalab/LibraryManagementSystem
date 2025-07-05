@@ -115,7 +115,7 @@ public class BookLendFormController implements Initializable {
             }
 
             BorrowRecordDto newRecord = new BorrowRecordDto(null, userDto, bookDto, LocalDate.now(),
-                    null, 0.0);
+                    null, 0.0,false);
 
             boolean success = borrowRecordService.add(newRecord);
 
@@ -218,7 +218,7 @@ public class BookLendFormController implements Initializable {
 
             long days = ChronoUnit.DAYS.between(borrowDate, compareDate);
 
-            if (days > allowedDays) {
+            if (days > allowedDays && !dto.isPaidFine()) {
                 fine = (days - allowedDays) * finePerDay;
                 dto.setFine(fine);
             } else {
@@ -230,7 +230,8 @@ public class BookLendFormController implements Initializable {
                     dto.getBook(),
                     borrowDate,
                     returnDate,
-                    fine
+                    fine,
+                    false
             );
             borrowRecordService.update(newRecord);
         }
