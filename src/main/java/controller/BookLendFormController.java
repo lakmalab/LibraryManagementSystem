@@ -99,6 +99,10 @@ public class BookLendFormController implements Initializable {
             new Alert(Alert.AlertType.WARNING, "Please select all fields.").show();
             return;
         }
+        if (lblBookAvailability.getText() == "Not Available" || lblUserEligibility.getText() == "Not Eligible") {
+            new Alert(Alert.AlertType.WARNING, "Please select all fields.").show();
+            return;
+        }
 
         try {
             UserDto userDto = userService.searchById(username);
@@ -187,6 +191,22 @@ public class BookLendFormController implements Initializable {
         try {
             List<String> books = bookService.getBookNames();
             cmbBookCode.setItems(FXCollections.observableArrayList(books));
+            cmbBookCode.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal != null) {
+                    List<BorrowRecordDto> all = borrowRecordService.getAll();
+
+                    for (BorrowRecordDto dto : all) {
+                        if (dto.getBook().getAvailable()) {
+                            lblBookAvailability.setText("Not Available");
+                            lblBookAvailability.setStyle("-fx-text-fill: red;");
+                        }else {
+                            lblBookAvailability.setText("Available");
+                            lblBookAvailability.setStyle("-fx-text-fill: green;");
+                        }
+                    }
+
+                }
+            });
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -196,6 +216,26 @@ public class BookLendFormController implements Initializable {
         try {
             List<String> userNames = userService.getUserNames();
             cmbUserName.setItems(FXCollections.observableArrayList(userNames));
+            cmbUserName.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal != null) {
+                    List<BorrowRecordDto> all = borrowRecordService.getAll();
+                    int count = 0;
+
+                    for (BorrowRecordDto dto : all) {
+                        if (dto.getUser().getName().equals(newVal) && dto.getFine() > 0) {
+                            count++;
+                        }
+                    }
+
+                    if (count > 3) {
+                        lblUserEligibility.setText("Not Eligible");
+                        lblUserEligibility.setStyle("-fx-text-fill: red;");
+                    } else {
+                        lblUserEligibility.setText("Eligible");
+                        lblUserEligibility.setStyle("-fx-text-fill: green;");
+                    }
+                }
+            });
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
