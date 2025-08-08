@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import service.custom.BookService;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -55,9 +56,9 @@ public class EditBookProfileFormController implements Initializable {
             Boolean b = bookService.deleteById(newValue.getBookID());
 
             if (b) {
-                new Alert(Alert.AlertType.INFORMATION, "User Deleted Successfully!").show();
+                new Alert(Alert.AlertType.INFORMATION, "Book Deleted Successfully!").show();
             } else {
-                new Alert(Alert.AlertType.ERROR, "Failed to Update User.").show();
+                new Alert(Alert.AlertType.ERROR, "Failed to Update Book.").show();
             }
         } finally {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -109,5 +110,9 @@ public class EditBookProfileFormController implements Initializable {
         txtIsbn.setText(String.valueOf(newValue.getIsbn()));
         txtDescription.setText(newValue.getDescription());
         cmbGenre.setValue(newValue.getGenre());
+    }
+    private void refreshMainStage() throws IOException {
+        DashboardFormController Controller = DashboardFormController.getInstance();
+        Controller.btnBookManagementFormOnAction(new ActionEvent());
     }
 }

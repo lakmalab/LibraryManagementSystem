@@ -1,23 +1,23 @@
 package service.custom.impl;
 
 import com.google.inject.Inject;
+import dto.BookDto;
 import dto.BorrowRecordDto;
+import entity.BookEntity;
 import entity.BorrowRecordEntity;
 import org.modelmapper.ModelMapper;
 import repository.custom.BorrowRecordRepository;
 import service.custom.BorrowRecordService;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class BorrowRecordServiceImpl implements BorrowRecordService {
 
     @Inject
     BorrowRecordRepository repository;
-    @Override
-    public BorrowRecordDto searchById(String id) {
-        return null;
-    }
+
 
     @Override
     public Boolean add(BorrowRecordDto dto) {
@@ -46,5 +46,16 @@ public class BorrowRecordServiceImpl implements BorrowRecordService {
     @Override
     public Boolean deleteById(Long recordID) {
         return null;
+    }
+
+    @Override
+    public List<BorrowRecordDto> getRecordsByBookId(Long bookID) {
+        List<BorrowRecordEntity> all = Collections.singletonList(repository.searchById(String.valueOf(bookID)));
+        ArrayList<BorrowRecordDto> BorrowRecordDtoList = new ArrayList<>();
+
+        all.forEach(BorrowRecordEntity -> {
+            BorrowRecordDtoList.add(new ModelMapper().map(BorrowRecordEntity, BorrowRecordDto.class));
+        });
+        return List.of();
     }
 }

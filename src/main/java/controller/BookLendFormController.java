@@ -100,7 +100,7 @@ public class BookLendFormController implements Initializable {
             return;
         }
         if (lblBookAvailability.getText() == "Not Available" || lblUserEligibility.getText() == "Not Eligible") {
-            new Alert(Alert.AlertType.WARNING, "Please select all fields.").show();
+            new Alert(Alert.AlertType.WARNING, "Not Eligible.").show();
             return;
         }
 
@@ -138,8 +138,8 @@ public class BookLendFormController implements Initializable {
 
 
     @FXML
-    void btnSearchOnAction(ActionEvent event) {
-
+    void btnSearchOnAction(ActionEvent event) throws SQLException {
+        loadTable(txtSearch.getText().trim());
     }
 
     @Override
@@ -191,26 +191,29 @@ public class BookLendFormController implements Initializable {
         try {
             List<String> books = bookService.getBookNames();
             cmbBookCode.setItems(FXCollections.observableArrayList(books));
+
             cmbBookCode.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
                 if (newVal != null) {
-                    List<BorrowRecordDto> all = borrowRecordService.getAll();
-
-                    for (BorrowRecordDto dto : all) {
-                        if (dto.getBook().getAvailable()) {
-                            lblBookAvailability.setText("Not Available");
-                            lblBookAvailability.setStyle("-fx-text-fill: red;");
-                        }else {
+                    try {
+                        boolean isAvailable = bookService.searchById(newVal).getAvailable();
+                        if (isAvailable) {
                             lblBookAvailability.setText("Available");
                             lblBookAvailability.setStyle("-fx-text-fill: green;");
+                        } else {
+                            lblBookAvailability.setText("Not Available");
+                            lblBookAvailability.setStyle("-fx-text-fill: red;");
                         }
+                    } catch (SQLException e) {
+                        lblBookAvailability.setText("Error checking availability");
+                        lblBookAvailability.setStyle("-fx-text-fill: red;");
                     }
-
                 }
             });
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
 
     private void loadUserNames() {
         try {
@@ -240,11 +243,28 @@ public class BookLendFormController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
     private void loadTable() {
         List<BorrowRecordDto> all = borrowRecordService.getAll();
         calculateFine(all);
         tblRecord.setItems(FXCollections.observableArrayList(all));
     }
+    private void loadTable(String name) throws SQLException {
+        BookDto book = bookService.searchById(name);
+
+        if (book != null) {
+            // Fetch the borrow records related to the found book
+            List<BorrowRecordDto> all = borrowRecordService.getRecordsByBookId(book.getBookID());
+            calculateFine(all);
+            tblRecord.setItems(FXCollections.observableArrayList(all));
+        } else {
+            new Alert(Alert.AlertType.INFORMATION, "No book found with that ID number.").show();
+            // Consider what you want to do if the book is not found
+            // For example, you might want to clear the table or reset the view
+            tblRecord.setItems(FXCollections.observableArrayList()); // Clear the table if no book is found
+        }
+    }
+
 
     private void calculateFine(List<BorrowRecordDto> all) {
         double finePerDay = 10.0;
@@ -294,7 +314,6 @@ public class BookLendFormController implements Initializable {
         );
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-
-
     }
+
 }

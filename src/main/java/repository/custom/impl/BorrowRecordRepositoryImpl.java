@@ -2,6 +2,7 @@ package repository.custom.impl;
 
 import dto.BorrowRecordDto;
 import entity.BorrowRecordEntity;
+import entity.UserEntity;
 import org.hibernate.Session;
 import repository.custom.BorrowRecordRepository;
 import util.HibernateUtil;
@@ -13,7 +14,11 @@ public class BorrowRecordRepositoryImpl implements BorrowRecordRepository {
 
     @Override
     public BorrowRecordEntity searchById(String id) {
-        return null;
+        try (Session session = HibernateUtil.getSession()) {
+            return session.createQuery("FROM BorrowRecordEntity WHERE book = :id", BorrowRecordEntity.class)
+                    .setParameter("id", id)
+                    .uniqueResult();
+        }
     }
 
     @Override

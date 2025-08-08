@@ -23,6 +23,11 @@ public class DashboardFormController implements Initializable {
     @FXML
     private AnchorPane root;
     private Injector injector;
+    private static DashboardFormController instance;
+
+    public static DashboardFormController getInstance() {
+        return instance;
+    }
     @FXML
     void btnHomeFormOnAction(ActionEvent event) throws IOException {
         URL resource = this.getClass().getResource("/view/home.fxml");
@@ -33,8 +38,6 @@ public class DashboardFormController implements Initializable {
         Parent load = loader.load();
         this.root.getChildren().clear();
         this.root.getChildren().add(load);
-
-
     }
 
     @FXML
@@ -72,6 +75,7 @@ public class DashboardFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        instance = this;
         injector = Guice.createInjector(new AppModule());
         URL resource = this.getClass().getResource("/view/home.fxml");
 

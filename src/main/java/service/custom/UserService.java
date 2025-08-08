@@ -13,7 +13,5 @@ public interface UserService extends SuperService {
     UserDto searchById(Integer id) throws SQLException;
     UserDto searchById(String id) throws SQLException;
     List<UserDto> getAll() throws SQLException;
-
-
     List<String> getUserNames() throws SQLException;
 }

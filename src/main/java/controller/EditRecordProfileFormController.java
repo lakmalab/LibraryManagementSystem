@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import service.custom.BookService;
 import service.custom.BorrowRecordService;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -59,7 +60,7 @@ public class EditRecordProfileFormController implements Initializable {
 
 
     @FXML
-    void btnUpdateOnAction(ActionEvent event) {
+    void btnUpdateOnAction(ActionEvent event) throws IOException {
        BookDto bookDto;
         String username = txtUser.getText();
         String bookname = txtTitle.getText();
@@ -90,6 +91,8 @@ public class EditRecordProfileFormController implements Initializable {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Database error: " + e.getMessage()).show();
             e.printStackTrace();
+        }finally {
+            refreshMainStage();
         }
     }
 
@@ -133,5 +136,9 @@ public class EditRecordProfileFormController implements Initializable {
             }
         });
         dateReturened.setDisable(true);
+    }
+    private void refreshMainStage() throws IOException {
+        DashboardFormController Controller = DashboardFormController.getInstance();
+        Controller.btnBookLendOnAction(new ActionEvent());
     }
 }

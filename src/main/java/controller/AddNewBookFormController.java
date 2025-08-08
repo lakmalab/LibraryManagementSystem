@@ -81,12 +81,14 @@ public class AddNewBookFormController implements Initializable{
         } finally {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
+            refreshMainStage();
         }
     }
 
     @FXML
     void btnCancelOnAction(ActionEvent event) {
-
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
     public static String convertImageToBase64(String imagePath) throws IOException {
         File file = new File(imagePath);
@@ -95,8 +97,11 @@ public class AddNewBookFormController implements Initializable{
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         cmbGenre.getItems().addAll(Genre.values());
         cmbGenre.setValue(Genre.EDUCATIONAL);
+    }
+    private void refreshMainStage() throws IOException {
+        DashboardFormController Controller = DashboardFormController.getInstance();
+        Controller.btnBookManagementFormOnAction(new ActionEvent());
     }
 }

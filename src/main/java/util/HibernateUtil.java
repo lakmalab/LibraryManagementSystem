@@ -1,6 +1,7 @@
 package util;
 
 
+import entity.AdminEntity;
 import entity.BookEntity;
 import entity.BorrowRecordEntity;
 import entity.UserEntity;
@@ -24,6 +25,7 @@ public class HibernateUtil {
                 .addAnnotatedClass(UserEntity.class)
                 .addAnnotatedClass(BookEntity.class)
                 .addAnnotatedClass(BorrowRecordEntity.class)
+                .addAnnotatedClass(AdminEntity.class)
                 .getMetadataBuilder()
                 .applyImplicitNamingStrategy(ImplicitNamingStrategyJpaCompliantImpl.INSTANCE)
                 .build();

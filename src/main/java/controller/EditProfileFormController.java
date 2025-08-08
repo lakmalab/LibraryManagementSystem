@@ -13,6 +13,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import service.custom.UserService;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 public class EditProfileFormController {
 
     public Label lbluserID;
@@ -42,12 +45,14 @@ public class EditProfileFormController {
     }
 
     @FXML
-    void btnCancelOnAction(ActionEvent event) {
-
+    void btnCancelOnAction(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+        refreshMainStage();
     }
 
     @FXML
-    void btnUpdateOnAction(ActionEvent event) {
+    void btnUpdateOnAction(ActionEvent event) throws IOException {
         String name = txtName.getText();
         String address = txtAddress.getText();
         String idnumber = txtIdNumber.getText();
@@ -71,26 +76,36 @@ public class EditProfileFormController {
         } finally {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
+            refreshMainStage();
         }
     }
 
 
 
-    public void btnDeleteOnAction(ActionEvent actionEvent) {
+    public void btnDeleteOnAction(ActionEvent actionEvent) throws IOException {
         UserDto newUser = new UserDto(user.getUserId(), null,null, null, null);
 
         try {
-            Boolean b = userService.updateUser(newUser);
+            Boolean b = userService.deleteUser(newUser);
 
             if (b) {
                 new Alert(Alert.AlertType.INFORMATION, "User Deleted Successfully!").show();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Failed to Update User.").show();
             }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.INFORMATION, "\"Failed to Delete\")").show();
+            throw new RuntimeException(e);
         } finally {
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.close();
+            refreshMainStage();
         }
 
+    }
+    private void refreshMainStage() throws IOException {
+
+        DashboardFormController Controller = DashboardFormController.getInstance();
+        Controller.btnUserManagmentFormOnAction(new ActionEvent());
     }
 }

@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import service.custom.UserService;
 import util.ServiceType;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class AddNewUser {
@@ -29,7 +30,7 @@ public class AddNewUser {
     private UserService userService;
 
     @FXML
-    void btnAddOnAction(ActionEvent event) {
+    void btnAddOnAction(ActionEvent event) throws IOException {
         String name = txtName.getText();
         String address = txtAddress.getText();
         String idnumber = txtIdNumber.getText();
@@ -66,6 +67,7 @@ public class AddNewUser {
         }finally {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
+            refreshMainStage();
         }
     }
 
@@ -74,5 +76,8 @@ public class AddNewUser {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
-
+    private void refreshMainStage() throws IOException {
+        DashboardFormController Controller = DashboardFormController.getInstance();
+        Controller.btnUserManagmentFormOnAction(new ActionEvent());
+    }
 }
