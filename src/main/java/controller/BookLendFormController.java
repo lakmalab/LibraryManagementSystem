@@ -253,15 +253,13 @@ public class BookLendFormController implements Initializable {
         BookDto book = bookService.searchById(name);
 
         if (book != null) {
-            // Fetch the borrow records related to the found book
             List<BorrowRecordDto> all = borrowRecordService.getRecordsByBookId(book.getBookID());
             calculateFine(all);
             tblRecord.setItems(FXCollections.observableArrayList(all));
         } else {
             new Alert(Alert.AlertType.INFORMATION, "No book found with that ID number.").show();
-            // Consider what you want to do if the book is not found
-            // For example, you might want to clear the table or reset the view
-            tblRecord.setItems(FXCollections.observableArrayList()); // Clear the table if no book is found
+
+            tblRecord.setItems(FXCollections.observableArrayList());
         }
     }
 

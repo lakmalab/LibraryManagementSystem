@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lombok.Getter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,11 +24,9 @@ public class DashboardFormController implements Initializable {
     @FXML
     private AnchorPane root;
     private Injector injector;
+    @Getter
     private static DashboardFormController instance;
 
-    public static DashboardFormController getInstance() {
-        return instance;
-    }
     @FXML
     void btnHomeFormOnAction(ActionEvent event) throws IOException {
         URL resource = this.getClass().getResource("/view/home.fxml");

@@ -45,14 +45,13 @@ public class EditBookProfileFormController implements Initializable {
     private BookService bookService;
     @FXML
     void btnCancelOnAction(ActionEvent event) {
-
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        BookDto newBook = new BookDto(newValue.getBookID(),null, null,null, null, null,null,true);
-
-        try {
+       try {
             Boolean b = bookService.deleteById(newValue.getBookID());
 
             if (b) {
@@ -67,7 +66,7 @@ public class EditBookProfileFormController implements Initializable {
     }
 
     @FXML
-    void btnUpdateOnAction(ActionEvent event) {
+    void btnUpdateOnAction(ActionEvent event) throws IOException {
         Long  isbn = Long.valueOf(txtIsbn.getText());
         String title=txtTitle.getText();
         String author=txtAuthor.getText();
@@ -93,6 +92,7 @@ public class EditBookProfileFormController implements Initializable {
         } finally {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
+            refreshMainStage();
         }
     }
 

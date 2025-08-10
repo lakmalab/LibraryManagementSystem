@@ -48,6 +48,7 @@ public class UserManagementFormController  implements Initializable {
     private JFXTextArea txtSearch;
     @Inject
     private UserService userService;
+    @Inject
     private Injector injector;
     @FXML
     void btnAddUserOnAction(ActionEvent event) throws IOException {
@@ -72,7 +73,7 @@ public class UserManagementFormController  implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        injector = Guice.createInjector(new AppModule());
+
 
         colUserId.setCellValueFactory(new PropertyValueFactory<>("userId"));
         ColName.setCellValueFactory(new PropertyValueFactory<>("name"));
